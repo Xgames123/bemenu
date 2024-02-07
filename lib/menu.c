@@ -1226,10 +1226,7 @@ bm_menu_run_with_key(struct bm_menu *menu, enum bm_key key, uint32_t unicode)
 
         case BM_KEY_SHIFT_TAB:
             {
-                const char *text;
-                struct bm_item *highlighted = bm_menu_get_highlighted_item(menu);
-                if (highlighted && (text = bm_item_get_text(highlighted)))
-                    bm_menu_set_filter(menu, text);
+                menu_prev(menu, count, true);
             }
             break;
 
