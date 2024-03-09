@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 #include <unistd.h>
 #include <dirent.h>
 #include <assert.h>
