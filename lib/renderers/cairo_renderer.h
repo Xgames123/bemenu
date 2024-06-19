@@ -67,7 +67,7 @@ bm_cairo_create_for_surface(struct cairo *cairo, cairo_surface_t *surface)
     if (!(cairo->pango = pango_cairo_create_context(cairo->cr)))
         goto fail;
 
-    cairo_set_antialias(cairo->cr, CAIRO_ANTIALIAS_NONE);
+    cairo_set_antialias(cairo->cr, CAIRO_ANTIALIAS_DEFAULT);
 
     cairo->surface = surface;
     assert(cairo->scale > 0);
@@ -264,13 +264,13 @@ bm_cairo_entry_message(char *entry_text, bool highlighted, uint32_t event_feedba
 static inline void
 bm_cairo_rounded_path(cairo_t *cr, double x, double y, double width, double height, double radius)
 {
-    double ajusted_radius = MIN(MIN(radius, height*0.5), width*0.5); /* Prevent border from intersecting itself. */
+    double adjusted_radius = MIN(MIN(radius, height * 0.5), width * 0.5); /* Prevent border from intersecting itself. */
     double degrees = M_PI / 180;
     cairo_new_sub_path(cr);
-    cairo_arc(cr, x + width - ajusted_radius, y + ajusted_radius, ajusted_radius, -90 * degrees, 0 * degrees);
-    cairo_arc(cr, x + width - ajusted_radius, y + height - ajusted_radius, ajusted_radius, 0 * degrees, 90 * degrees);
-    cairo_arc(cr, x + ajusted_radius, y + height - ajusted_radius, ajusted_radius, 90 * degrees, 180 * degrees);
-    cairo_arc(cr, x + ajusted_radius, y + ajusted_radius, ajusted_radius, 180 * degrees, 270 * degrees);
+    cairo_arc(cr, x + width - adjusted_radius, y + adjusted_radius, adjusted_radius, -90 * degrees, 0 * degrees);
+    cairo_arc(cr, x + width - adjusted_radius, y + height - adjusted_radius, adjusted_radius, 0 * degrees, 90 * degrees);
+    cairo_arc(cr, x + adjusted_radius, y + height - adjusted_radius, adjusted_radius, 90 * degrees, 180 * degrees);
+    cairo_arc(cr, x + adjusted_radius, y + adjusted_radius, adjusted_radius, 180 * degrees, 270 * degrees);
     cairo_close_path(cr);
 }
 
